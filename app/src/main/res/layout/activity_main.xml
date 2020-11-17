@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/cardview_default_radius"
+                android:text="@string/bt_power_on" />
+
+            <Button
+                android:id="@+id/bt_query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/cardview_default_radius"
+                android:text="@string/bt_query" />
+
+            <Button
+                android:id="@+id/bt_speak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/cardview_default_radius"
+                android:text="@string/bt_speak" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <TextView
+            android:id="@+id/lb_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lb_input" />
+
+        <TextView
+            android:id="@+id/tx_input"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/lb_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lb_output" />
+
+        <TextView
+            android:id="@+id/tx_output"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/lb_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lb_status" />
+
+        <TextView
+            android:id="@+id/tx_status"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:scrollbars="vertical"
+            android:text="" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
