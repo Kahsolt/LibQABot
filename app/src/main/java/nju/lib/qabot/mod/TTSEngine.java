@@ -2,65 +2,54 @@ package nju.lib.qabot.mod;
 
 import android.media.MediaPlayer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 
+import nju.lib.qabot.MainActivity;
 import nju.lib.qabot.R;
 import nju.lib.qabot.util.Requests;
+import nju.lib.qabot.util.Response;
 
 public class TTSEngine extends Engine {
 
-    static private final String SYNTH_URL = String.format("http://%s:%s/synth", R.string.tts_server_ip, R.string.tts_server_port);
+    private String TTS_API;
+    private File tmpFile;
 
-    private File tmpfile;
+    public TTSEngine(MainActivity app) { super(app); }
 
-    public TTSEngine(AppCompatActivity app) {
-        super(app);
-        try {
-            tmpfile = File.createTempFile("synth", "mp3", app.getCacheDir());
-            // tmpfile.deleteOnExit();
-        } catch (IOException e) { e.printStackTrace(); }
+    @Override
+    public void init() {
+        TTS_API = String.format("http://%s:%s/synth", app.getResources().getString(R.string.tts_server_ip), app.getResources().getString(R.string.tts_server_port));
+        statusShow(String.format("synthUrl: %s", TTS_API));
+        tmpFile = new File(app.getCacheDir().getAbsolutePath(), "synth.mp3");
+        statusShow(String.format("tmpFile: %s", tmpFile));
     }
 
-    public void synth(String text) {
-        // ask server
-        statusShow("online synthersizing");
-        HashMap<String, String> params = new HashMap<String, String>() {{
-            put("text", text);
-        }};
-        JSONObject res = Requests.post(SYNTH_URL, params);
-        boolean ok = res.getBoolean("ok");
+    public boolean synth(String text) {
+        statusShow(String.format("GET: %s", text));
+        HashMap<String, String> params = new HashMap<String, String>() {{ put("text", text); }};
+        Response res = Requests.get(TTS_API, params);
+
+        statusShow(String.format("Resp: %s", res));
+        boolean ok = res.hasFile();
         if (!ok) {
             statusShow("response not ok, server error?");
-            return;
+        } else {
+            res.file.save(tmpFile);
         }
-        byte[] data = res.getBytes("data");
-
-        // write tmpfile
-        statusShow("write tmpfile");
-        try {
-            try (FileOutputStream fos = new FileOutputStream(tmpfile)) {
-                fos.write(data);
-            }
-        } catch (IOException e) { e.printStackTrace(); }
+        return ok;
     }
 
     public void speak() {
         statusShow("speaking");
         try {
-            try (FileInputStream fis = new FileInputStream(tmpfile)) {
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.setDataSource(fis.getFD());
-                mediaPlayer.prepare();
-                mediaPlayer.start();
+            try (FileInputStream fis = new FileInputStream(tmpFile)) {
+                MediaPlayer player = new MediaPlayer();
+                player.setDataSource(fis.getFD());
+                player.prepare();
+                player.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,8 +57,7 @@ public class TTSEngine extends Engine {
     }
 
     public void synthAndSpeak(String text) {
-        synth(text);
-        speak();
+        if (synth(text)) speak();
     }
 
 }

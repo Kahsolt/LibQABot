@@ -16,13 +16,13 @@ public class RecordWorker {
 
     // record device & status
     private boolean status = false;    // false for idle, true for recording
-    private int bufferSize = AudioRecord.getMinBufferSize(AUDIO_SAMPLE_RATE, AUDIO_CHANNEL, AUDIO_ENCODING);
+    private final int bufferSize = AudioRecord.getMinBufferSize(AUDIO_SAMPLE_RATE, AUDIO_CHANNEL, AUDIO_ENCODING);
     private AudioRecord recorder = new AudioRecord(AUDIO_INPUT_DEVICE, AUDIO_SAMPLE_RATE, AUDIO_CHANNEL, AUDIO_ENCODING, bufferSize);
-    private LinkedList<byte[]> frameBuffer = new LinkedList<>();
+    private final LinkedList<byte[]> frameBuffer = new LinkedList<>();
     private int dataLength = 0;    // total length of data in `frameBuffer`
 
     // singleton
-    static private RecordWorker INSTANCE;
+    static private final RecordWorker INSTANCE;
     static { INSTANCE = new RecordWorker(); }
     private RecordWorker() { }
     static public RecordWorker getInstance() { return INSTANCE; }

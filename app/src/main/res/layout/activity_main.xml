@@ -60,11 +60,15 @@
             android:layout_height="wrap_content"
             android:text="@string/lb_output" />
 
-        <TextView
+        <EditText
             android:id="@+id/tx_output"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:text="" />
+            android:text=""
+            android:autofillHints=""
+            android:inputType="text"
+            android:layout_gravity="top"
+            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/lb_status"
@@ -77,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:scrollbars="vertical"
+            android:fillViewport="true"
             android:text="" />
 
     </LinearLayout>

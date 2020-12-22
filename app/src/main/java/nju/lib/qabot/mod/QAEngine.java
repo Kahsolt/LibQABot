@@ -1,14 +1,17 @@
 package nju.lib.qabot.mod;
 
-import androidx.appcompat.app.AppCompatActivity;
+import nju.lib.qabot.MainActivity;
 
 public class QAEngine extends Engine {
 
-    public QAEngine(AppCompatActivity app) { super(app); }
+    public QAEngine(MainActivity app) { super(app); }
+
+    @Override
+    public void init() { }
 
     public String query(String question) {
         statusShow("querying");
-        return String.format("You've asked %s", question);
+        return new StringBuffer(question).reverse().toString();
     }
 
 }

@@ -1,22 +1,20 @@
 package nju.lib.qabot.mod;
 
 import android.util.Log;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import nju.lib.qabot.MainActivity;
 
-import nju.lib.qabot.R;
+public abstract class Engine {
 
-// this class just proxies method `MainActivity.statusShow()`
-public class Engine {
+    protected final MainActivity app;
 
-    private AppCompatActivity app;
+    public Engine(MainActivity app) { this.app = app; }
 
-    public Engine(AppCompatActivity app) { this.app = app; }
+    public void init() { /* to @Override */ }
 
     protected void statusShow(String message) {
         Log.i(this.getClass().getSimpleName(), message);
-        ((TextView) app.findViewById(R.id.tx_status)).append(message + '\n');
+        app.tx_status.append(message + '\n');
     }
 
 }

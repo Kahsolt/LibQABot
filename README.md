@@ -1,14 +1,13 @@
-# 
+# LibQABot
 
-    
+    Android Frontend App
 
 ----
 
-### Quickstart
-  - 
-  - 
-  - 
+#### dependencies
 
+  - FastJson
+  - OkHTTP
 
 ----
 
