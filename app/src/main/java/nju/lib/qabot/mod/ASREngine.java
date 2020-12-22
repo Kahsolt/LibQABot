@@ -19,7 +19,7 @@ public class ASREngine extends Engine {
     public String recognize(byte[] data) {
         statusShow("audio recognizing");
         HashMap<String, String> datas = new HashMap<String, String>();
-        datas.put("wav_data", data.toString());
+        datas.put("file", data.toString());
         JSONObject res = Requests.post(RECOG_URL, datas);
         boolean ok = res.getBoolean("ok");
         if(!ok) {
