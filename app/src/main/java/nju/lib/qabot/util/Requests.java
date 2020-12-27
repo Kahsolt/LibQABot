@@ -94,11 +94,12 @@ public class Requests {
             assert body != null;
             byte[] data = body.bytes();
             MediaType type = body.contentType();
+            app.statusShow(String.format("MIME_TYPE: %s", type));
 
-            if (type == MIME_TYPE_JSON) {
+            try {
                 return Response.asJson(data);
-            } else {
-                Log.w("Requests", String.format("receive MIME_TYPE: %s, taken as binary", type));
+            } catch (Exception ignore){
+                app.statusShow(String.format("type is file!"));
                 String filename = res.header("X-FILENAME", "tmp");
                 return Response.asFile(data, filename);
             }
