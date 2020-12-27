@@ -1,6 +1,6 @@
 package nju.lib.qabot.util;
 
-import  android.annotation.SuppressLint;
+import android.annotation.SuppressLint;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -10,9 +10,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-
-import static nju.lib.qabot.util.Requests.app;
 
 public class Response {
 
@@ -47,18 +46,15 @@ public class Response {
     public WebFile file = null;
 
     private Response() { }
-    public static Response asJson(byte[] data) {
+    public static Response asJson(byte[] data) throws Exception {
         Response resp = new Response();
-        app.statusShow(String.format("data1:%S",Arrays.toString(data)));
-        app.statusShow(String.format("data2:%S",data));
-        resp.json = JSONObject.parseObject(Arrays.toString(data));
+        resp.json = JSONObject.parseObject(new String(data, "UTF-8"));
         return resp;
     }
     public static Response asFile(byte[] data, String filename) {
         Response resp = new Response();
         resp.file = new WebFile(data, filename);
         return resp;
-
     }
 
     public boolean hasJson() { return json != null; }

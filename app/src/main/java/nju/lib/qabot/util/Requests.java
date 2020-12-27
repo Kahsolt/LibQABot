@@ -93,13 +93,13 @@ public class Requests {
             ResponseBody body = res.body();   // it's a stream, thus only read once
             assert body != null;
             byte[] data = body.bytes();
+
             MediaType type = body.contentType();
             app.statusShow(String.format("MIME_TYPE: %s", type));
 
             try {
                 return Response.asJson(data);
             } catch (Exception ignore){
-                app.statusShow(String.format("type is file!"));
                 String filename = res.header("X-FILENAME", "tmp");
                 return Response.asFile(data, filename);
             }
