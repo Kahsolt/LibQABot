@@ -10,6 +10,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class Response {
@@ -45,9 +46,9 @@ public class Response {
     public WebFile file = null;
 
     private Response() { }
-    public static Response asJson(byte[] data) {
+    public static Response asJson(byte[] data) throws Exception {
         Response resp = new Response();
-        resp.json = JSONObject.parseObject(Arrays.toString(data));
+        resp.json = JSONObject.parseObject(new String(data, "UTF-8"));
         return resp;
     }
     public static Response asFile(byte[] data, String filename) {

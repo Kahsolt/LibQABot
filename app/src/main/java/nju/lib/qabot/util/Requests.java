@@ -93,6 +93,7 @@ public class Requests {
             ResponseBody body = res.body();   // it's a stream, thus only read once
             assert body != null;
             byte[] data = body.bytes();
+
             MediaType type = body.contentType();
             app.statusShow(String.format("MIME_TYPE: %s", type));
 
