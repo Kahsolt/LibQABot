@@ -33,7 +33,8 @@ public class QAEngine extends Engine {
             statusShow(String.format("don't receive good answer!"));
         }
         statusShow(String.format("result:%s",res.json));
-        return new StringBuffer(question).reverse().toString();
+        return res.json.getString("response");
+//        return new StringBuffer(question).reverse().toString();
     }
 
 }
