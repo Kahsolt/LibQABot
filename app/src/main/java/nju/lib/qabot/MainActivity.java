@@ -143,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
                 toApplyList.add(perm);
         if (!toApplyList.isEmpty()) {
             String[] tmpList = new String[toApplyList.size()];
-            ActivityCompat.requestPermissions(this, toApplyList.toArray(tmpList), 233);   // 233 defined by app, maybe used in callback `onRequestPermissionsResult()`
+            // 233 defined by app, maybe used in callback `onRequestPermissionsResult()`
+            ActivityCompat.requestPermissions(this, toApplyList.toArray(tmpList), 233);
         }
     }
 
