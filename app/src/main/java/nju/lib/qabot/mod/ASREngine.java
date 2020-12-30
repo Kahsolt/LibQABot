@@ -20,6 +20,7 @@ public class ASREngine extends Engine {
     public String recognize(byte[] data) {
         statusShow("audio recognizing");
         Response res = Requests.post(ASR_API, data);
+        statusShow(res.toString());
         if (res.hasJson()) {
             return res.json.getString("result");
         }
