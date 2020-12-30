@@ -99,8 +99,8 @@ public class Requests {
 
             try {
                 return Response.asJson(data);
-            } catch (Exception ignore){
-                String filename = res.header("X-FILENAME", "tmp");
+            } catch (Exception ignore) {
+                String filename = res.header("X-FILENAME", null);
                 return Response.asFile(data, filename);
             }
         } catch (IOException | AssertionError e) {

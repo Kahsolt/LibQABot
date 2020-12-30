@@ -18,7 +18,7 @@ public class Response {
     public static Response EMPTY = new Response();
 
     public static class WebFile {
-        public String filename = null;
+        public String filename = "webfile.tmp";
         public byte[] data;
 
         public WebFile(byte[] data) { this.data = data; }

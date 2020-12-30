@@ -9,9 +9,9 @@
     <string name="lb_status">状态(debug)：</string>
 
     <string name="asr_server_ip">210.28.134.114</string>
-    <string name="asr_server_port">25101</string>
+    <string name="asr_server_port">15101</string>
     <string name="qa_server_ip">210.28.134.114</string>
-    <string name="qa_server_port">25102</string>
+    <string name="qa_server_port">15102</string>
     <string name="tts_server_ip">210.28.134.114</string>
-    <string name="tts_server_port">25103</string>
+    <string name="tts_server_port">15103</string>
 </resources>
