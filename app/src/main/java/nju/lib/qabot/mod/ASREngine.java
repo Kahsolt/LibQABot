@@ -13,13 +13,14 @@ public class ASREngine extends Engine {
 
     @Override
     public void init() {
-        ASR_API = String.format("http://%s:%s/synth", app.getResources().getString(R.string.asr_server_ip), app.getResources().getString(R.string.asr_server_port));
+        ASR_API = String.format("http://%s:%s/recognize", app.getResources().getString(R.string.asr_server_ip), app.getResources().getString(R.string.asr_server_port));
         statusShow(String.format("ASR_API: %s", ASR_API));
     }
 
     public String recognize(byte[] data) {
         statusShow("audio recognizing");
         Response res = Requests.post(ASR_API, data);
+        statusShow(res.toString());
         if (res.hasJson()) {
             return res.json.getString("result");
         }
